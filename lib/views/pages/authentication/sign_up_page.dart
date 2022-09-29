@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:online_academy/constants/colors.dart';
 import 'package:online_academy/constants/mixin_validator.dart';
-import 'package:online_academy/views/pages/authentication/forgot_page.dart';
-import 'package:online_academy/views/pages/authentication/sign_up_page.dart';
-import 'package:online_academy/views/pages/home/home_page.dart';
+import 'package:online_academy/views/widgets/app_logo.dart';
 import 'package:online_academy/views/widgets/imput_field.dart';
 import 'package:online_academy/views/widgets/primary_button.dart';
 
-class LoginPage extends StatelessWidget with ValidationMixin {
-  LoginPage({Key? key}) : super(key: key);
-
-  final TextEditingController passController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
+class SignupPage extends StatelessWidget with ValidationMixin {
+  SignupPage({Key? key}) : super(key: key);
   final _key = GlobalKey<FormState>();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -61,10 +60,33 @@ class LoginPage extends StatelessWidget with ValidationMixin {
                   ),
                   // AppLogo(size: size),
                   // SizedBox(height: size.height * 0.02),
-                  Text(
-                    "Digital Education",
-                    style: Theme.of(context).textTheme.headline5!.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Register",
+                      style: Theme.of(context).textTheme.headline5!.copyWith(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  InputField(
+                    hintText: "First Name",
+                    isObsure: false,
+                    controller: firstNameController,
+                    vlaidator: (email) {
+                      return isEmailValid(email!) ? null : 'Enter your name';
+                    },
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  InputField(
+                    hintText: "Last Name",
+                    isObsure: false,
+                    controller: lastNameController,
+                    vlaidator: (email) {
+                      return isEmailValid(email!)
+                          ? null
+                          : 'Enter your last name';
+                    },
                   ),
                   SizedBox(height: size.height * 0.02),
                   InputField(
@@ -79,47 +101,27 @@ class LoginPage extends StatelessWidget with ValidationMixin {
                   InputField(
                     hintText: "Password",
                     isObsure: true,
-                    controller: passController,
+                    controller: passwordController,
                     vlaidator: (password) {
                       return isPasswordValid(password!)
                           ? null
                           : 'Enter correct password';
                     },
                   ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: TextButton(
-                      onPressed: () {
-                        Get.to(() => ForgotPage());
-                      },
-                      child: const Text(
-                        'Forgot Password',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
                   SizedBox(height: size.height * 0.02),
                   PrimaryButton(
                     onTap: () {
-                      if (_key.currentState!.validate()) {
-                        Get.to(() => const HomePage());
-                      }
+                      if (_key.currentState!.validate()) {}
                     },
-                    text: 'Login',
+                    text: 'Register',
                     size: size,
                   ),
-                  Align(
-                    // alignment: Alignment.topRight,
-                    child: TextButton(
+                  TextButton(
                       onPressed: () {
-                        Get.to(() => SignupPage());
+                        Get.back();
                       },
-                      child: const Text(
-                        'Don\'t have an account? Signup',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
+                      child: const Text('Already have an account? Login',
+                          style: TextStyle(color: Colors.white)))
                 ],
               ),
             ),

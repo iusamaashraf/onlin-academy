@@ -16,7 +16,7 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(ColorsClass.primaryColor),
+          backgroundColor: MaterialStateProperty.all(Colors.white),
           padding: MaterialStateProperty.all(EdgeInsets.symmetric(
               horizontal: size.width * 0.3, vertical: size.height * 0.02))),
       onPressed: onTap,
@@ -25,7 +25,7 @@ class PrimaryButton extends StatelessWidget {
         style: Theme.of(context)
             .textTheme
             .subtitle1!
-            .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+            .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
       ),
     );
   }
